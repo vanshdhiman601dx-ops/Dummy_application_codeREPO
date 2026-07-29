@@ -45,6 +45,10 @@
         text-align: center;
       }
 
+      .screen[hidden] {
+        display: none;
+      }
+
       .brand {
         margin: 0 0 32px;
         font-size: clamp(2.25rem, 5vw, 4.25rem);
@@ -72,6 +76,27 @@
 
       .tagline .dark {
         display: block;
+      }
+
+      .second-tagline {
+        margin-bottom: 20px;
+      }
+
+      .second-tagline .purple-text {
+        color: var(--purple);
+      }
+
+      .description {
+        max-width: 510px;
+        margin: 0 auto 28px;
+        color: var(--muted);
+        font-size: clamp(1rem, 2vw, 1.3rem);
+        font-weight: 520;
+        line-height: 1.45;
+      }
+
+      .description strong {
+        color: var(--ink);
       }
 
       .features {
@@ -102,6 +127,24 @@
         background: linear-gradient(145deg, var(--purple-light), var(--purple));
         font-size: 1.35rem;
         font-weight: 800;
+      }
+
+      .feature-icon {
+        font-size: 1.15rem;
+      }
+
+      .page-two .features {
+        margin-bottom: 26px;
+      }
+
+      .page-two .brand {
+        margin-bottom: 32px;
+      }
+
+      .page-two .cta {
+        border: 0;
+        cursor: pointer;
+        font-family: inherit;
       }
 
       .caption {
@@ -261,32 +304,91 @@
       <span class="confetti purple" aria-hidden="true"></span>
 
       <section class="content" aria-labelledby="page-title">
-        <h1 class="brand" id="page-title">Rexpt <span>Dummy Page</span></h1>
+        <div class="screen page-one" id="page-one">
+          <h1 class="brand" id="page-title">Rexpt <span>Dummy Page</span></h1>
 
-        <h2 class="tagline">
-          <span class="accent">Never Miss a Call</span>
-          <span class="dark">Never Miss a Client</span>
-        </h2>
+          <h2 class="tagline">
+            <span class="accent">Never Miss a Call</span>
+            <span class="dark">Never Miss a Client</span>
+          </h2>
 
-        <ul class="features">
-          <li><span class="check">✓</span><span>Answers Calls</span></li>
-          <li><span class="check">✓</span><span>Books Appointments</span></li>
-          <li><span class="check">✓</span><span>Captures Leads</span></li>
-        </ul>
+          <ul class="features">
+            <li><span class="check">&#10003;</span><span>Answers Calls</span></li>
+            <li><span class="check">&#10003;</span><span>Books Appointments</span></li>
+            <li><span class="check">&#10003;</span><span>Captures Leads</span></li>
+          </ul>
 
-        <p class="caption">On its own, Automatically &amp; 24×7</p>
-        <a class="skip" href="#how-it-works">Skip&nbsp; &gt;&gt;&gt;</a>
+          <p class="caption">On its own, Automatically &amp; 24&times;7</p>
+          <a class="skip" href="#page-two">Skip&nbsp; &gt;&gt;&gt;</a>
 
-        <a class="cta" id="how-it-works" href="#">
-          <span>How It Works</span>
-          <span class="arrow" aria-hidden="true">→</span>
-        </a>
+          <a class="cta" id="how-it-works" href="#page-two">
+            <span>How It Works</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
 
-        <div class="pager" aria-label="Page 1 of 2">
-          <span class="active">1</span>
-          <span class="dot"></span>
+          <div class="pager" aria-label="Page 1 of 2">
+            <span class="active">1</span>
+            <span class="dot"></span>
+          </div>
+        </div>
+
+        <div class="screen page-two" id="page-two" hidden>
+          <h1 class="brand">Rexpt <span>Dummy Page 2</span></h1>
+
+          <h2 class="tagline second-tagline">
+            <span><span class="purple-text">Set Up in</span> Minutes</span>
+            <span class="dark">Test <span class="purple-text">Before You</span></span>
+            <span class="purple-text">Pay.</span>
+          </h2>
+
+          <p class="description">
+            No hardware. No technical setup. Hear<br />
+            how it answers your calls &mdash; <strong>then<br />decide.</strong>
+          </p>
+
+          <ul class="features">
+            <li>
+              <span class="check feature-icon">&#9835;</span>
+              <span>Talk to your AI receptionist</span>
+            </li>
+            <li>
+              <span class="check feature-icon">&#10003;</span>
+              <span>Review how it works for you</span>
+            </li>
+            <li>
+              <span class="check feature-icon">&nearr;</span>
+              <span>Go live when you're ready</span>
+            </li>
+          </ul>
+
+          <button class="cta" type="button">
+            <span>Build My Receptionist</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </button>
+
+          <div class="pager" aria-label="Page 2 of 2">
+            <span class="dot"></span>
+            <span class="active">2</span>
+          </div>
         </div>
       </section>
     </main>
+    <script>
+      const pageOne = document.getElementById("page-one");
+      const pageTwo = document.getElementById("page-two");
+      const pageTwoLinks = document.querySelectorAll(
+        '#how-it-works, .skip[href="#page-two"]'
+      );
+
+      pageTwoLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          pageOne.hidden = true;
+          pageTwo.hidden = false;
+          document.title = "Rexpt Dummy Page 2";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+    </script>
   </body>
 </html>
